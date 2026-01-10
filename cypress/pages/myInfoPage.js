@@ -8,6 +8,7 @@ class MyInfoPage  {
             //genericField: ".oxd-input--active",
 
             //Parte do Chat GPT
+            nickName: '[name="nickName"]', //(adicionei depois eu mesmo)
             employeeId: '[name="employeeId"]',
             otherId: '[name="otherId"]',
             driverLicense: '[name="licenseNo"]',
@@ -22,12 +23,16 @@ class MyInfoPage  {
     return selectors
     }
 
-    fillPersonalDetails(firstName, lastName, middleName, nicknameTest) {
+    fillPersonalDetails(firstName, lastName, middleName, nicknameTest, nickName) {
         cy.get(this.selectorsList().firstNameField).clear().type(firstName)
         cy.get(this.selectorsList().middleNameField).clear().type(middleName)
         cy.get(this.selectorsList().lastNameField).clear().type(lastName)
         //cy.get(this.selectorsList().genericField).eq(3).clear().type(nicknameTest)
-       
+        cy.get('body').then($body => {
+            if ($body.find('[name="nickName"]').length) {
+               cy.get('[name="nickName"]').clear().type(nickName)
+            }
+        })
     }
 
     //fillEmployeeDetails(employee, otherIdTest, driverLicenseTest, dateLicense, ssNumberTest, sinNumberTest) {
@@ -54,6 +59,7 @@ class MyInfoPage  {
 
             if ($body.find('[placeholder="yyyy-mm-dd"]').length) {
               cy.get('[placeholder="yyyy-mm-dd"]')
+                .eq(0)
                 .invoke('val', '')
                 .type(licenseExpiry)
             }
