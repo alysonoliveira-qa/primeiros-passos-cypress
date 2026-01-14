@@ -8,7 +8,7 @@ npm install
 ```
 > **NOTE**
 > >
-> it is necessary to have **node** installed !
+> **Node.js** must be installed before running the project.
 
 ## Running
 ```bash
@@ -16,7 +16,7 @@ npm install
 npx cypress open
 ```
 
-## Internal Running
+## Running via CLI
 ```bash
 # Run the automation by command line
 npx cypress run
